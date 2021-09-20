@@ -31,3 +31,5 @@ Another example:
             }
         }
 ```
+
+This was a fun project to learn a bit about more advanced Kotlin DSL generation. I am using a very similar pattern as [Ktor](https://ktor.io/docs/client.html) for this DSL and was very inspired by their `install()` builder pattern. Feel free to send PRs if you would like to add anything to this. The code is very simple at the moment. 
