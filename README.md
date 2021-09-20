@@ -1,4 +1,4 @@
-# Task-Schedular-KMM
+# Task Schedular KMM
 This is a simple description system for defining tasks in a KMM app that need to run either on Boot or at fixed intervals thought the app lifecycle.
 
 
