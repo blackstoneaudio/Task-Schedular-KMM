@@ -1,5 +1,32 @@
-# Task Schedular KMM
+# Task Scheduler KMM
 This is a simple description system for defining tasks in a KMM app that need to run either on Boot or at fixed intervals thought the app lifecycle.
+
+## How to Add Task Scheduler to Your App
+Add the repository to your project's `build.gradle.kts`. I'm using kotlin for my gradle syntax, but groovy
+will be pretty similar if that's what you use
+```kotlin 
+repositories {
+    ...
+    maven("https://repos.awhb.dev")
+    ...
+}
+```
+
+add following in your commonMain source set
+```kotlin
+sourceSets {
+  val commonMain by getting {
+    dependencies {
+      ...
+      implementation("com.blackstone:TaskScheduler:0.1.0")
+        ...
+    }
+  }
+}
+  ...
+```
+
+
 
 
 ## Examples of how to use it:
