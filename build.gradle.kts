@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.5.30"
-    id("com.android.library")
+//    id("com.android.library")
     id("kotlin-android-extensions")
     id("maven-publish")
 }
@@ -15,11 +15,11 @@ repositories {
 
 kotlin {
     val coroutines_version = "1.5.0-native-mt"
-    android()
+//    android()
     iosX64("ios") {
         binaries {
             framework {
-                baseName = "library"
+                baseName = "TaskScheduler"
             }
         }
     }
@@ -37,11 +37,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
-        val androidTest by getting
-        val iosMain by getting
-        val iosTest by getting
-        val jvmTest by getting
+
     }
 
     tasks.withType(Test::class) {
@@ -51,15 +47,38 @@ kotlin {
 
 }
 
-android {
-    compileSdkVersion(30)
-//    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(30)
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+// I don't think this is needed since we have a jvm target... pretty sure it's
+// only needed if you are putting resources or something in an .aar file
+//android {
+//    compileSdkVersion(30)
+////    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+//    defaultConfig {
+//        minSdkVersion(24)
+//        targetSdkVersion(30)
+//    }
+//    compileOptions {
+//        sourceCompatibility = JavaVersion.VERSION_1_8
+//        targetCompatibility = JavaVersion.VERSION_1_8
+//    }
+//}
+
+
+publishing {
+    // this fetches our credentials from ~/.gradle/gradle.properties
+    val mavenUser: String by project
+    val mavenPassword: String by project
+
+    repositories {
+        maven {
+            setUrl("https://repos.awhb.dev/releases")
+            authentication {
+                create("basic", BasicAuthentication::class.java)
+            }
+            credentials {
+                username = mavenUser
+                password = mavenPassword
+            }
+        }
     }
 }
+
